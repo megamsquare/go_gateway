@@ -21,7 +21,6 @@ func Load_config() *DBConfig {
 	return &conf
 }
 
-
 func Connect_db(conf *DBConfig) (*sql.DB, error) {
 	conn := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", conf.Address, conf.Port, conf.Username, conf.Password, conf.Database)
 
