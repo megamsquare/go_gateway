@@ -9,6 +9,7 @@ import (
 	"os/signal"
 	"time"
 
+	"github.com/gorilla/mux"
 	config "github.com/megamsquare/go_gateway/pkg/env_config"
 )
 
@@ -26,7 +27,7 @@ func Load_config() *ServerConfig {
 	return &conf
 }
 
-func ListenAndServe(conf ServerConfig, handler http.Handler) {
+func ListenAndServe(conf ServerConfig, r *mux.Router) {
 	port := conf.Port
 	if port == 0 {
 		appEnginePort := os.Getenv("PORT")
@@ -39,7 +40,7 @@ func ListenAndServe(conf ServerConfig, handler http.Handler) {
 
 	srv := http.Server{
 		Addr:         address,
-		Handler:      handler,
+		Handler:      r,
 		ReadTimeout:  conf.ReadTimeout,
 		WriteTimeout: conf.WriteTimeout,
 	}
