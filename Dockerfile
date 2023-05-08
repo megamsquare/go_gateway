@@ -17,4 +17,6 @@ WORKDIR /root/
 COPY --from=builder /gateway/.env .
 COPY --from=builder /gateway/main .
 
+EXPOSE 3000
+
 CMD [ "./main" ]
